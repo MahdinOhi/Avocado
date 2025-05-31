@@ -5,15 +5,15 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const SidebarIcons = () => {
     return (
-        <div className="flex justify-around px-2 text-xl">
+        <div className="flex justify-around px-2 text-xl pb-2">
             <span className="cursor-pointer">
-                <SettingsIcon sx={{ fontSize: 40, color: "white" }} />
+                <SettingsIcon sx={{ fontSize: 40, color: "black" }} />
             </span>
             <span className="cursor-pointer">
-                <AccountCircleIcon sx={{ fontSize: 40, color: "white" }} />
+                <AccountCircleIcon sx={{ fontSize: 40, color: "black" }} />
             </span>
             <span className="cursor-pointer">
-                <ArrowBackIcon sx={{ fontSize: 40, color: "white" }} />
+                <ArrowBackIcon sx={{ fontSize: 40, color: "black" }} />
             </span>
         </div>
     );

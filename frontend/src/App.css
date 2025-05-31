@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
 
+html,
+body,
 #root {
-  max-width: 3000px;
-  height: 950px;
+  height: 100%;
   margin: 0;
-  padding: 0rem;
-  text-align: center;
+  padding: 0;
+  overflow: hidden;
+  background-color: #d0fbc3;
   font-family: 'Audiowide', sans-serif;
 }
 

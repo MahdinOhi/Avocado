@@ -7,14 +7,14 @@ export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <aside className="w-64 bg-[#4e4e4c] flex flex-col justify-between py-4 px-3 rounded-l-3xl">
+    <aside className="w-64 bg-transparent flex flex-col justify-between py-4 px-3 h-full rounded-l-3xl overflow-hidden text-black">
       <div>
         <div className="px-4 py-6">
-          <p className="font-semibold text-white">User</p>
-          <p className="text-sm text-white">Placeholder</p>
+          <p className="font-semibold">User</p>
+          <p className="text-sm">Placeholder</p>
         </div>
 
-        <nav className="mt-4 space-y-2 rounded-3xl bg-[#6b6b14] h-full pt-20">
+        <nav className="mt-4 space-y-2 rounded-3xl bg-black/20 h-full pt-20">
           <SidebarLink text="Dashboard" to="/" active={location.pathname === "/"} />
           <SidebarLink text="Tasks" to="/tasks" active={location.pathname === "/tasks"} />
           <SidebarLink text="Notes" to="/notes" active={location.pathname === "/notes"} />
@@ -24,5 +24,6 @@ export default function Sidebar() {
 
       <SidebarIcons />
     </aside>
+
   );
 }

@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomeDashboard from "./components/Dashboard/HomeDashboard";
+import Dashboard from "./components/Dashboard/Dashboard";
 import "./App.css";
 import './index.css';
 
 export default function App() {
   return (
     <div>
-      <HomeDashboard />
+      <Dashboard />
       <Routes>
         {/* Add other routes here */}
         <Route path="/tasks" element={<div>Tasks Page</div>} />
