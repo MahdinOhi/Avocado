@@ -5,12 +5,18 @@ import "./App.css";
 
 export default function App() {
   return (
-    <div>
-      <HomeDashboard />
+    <div className="min-h-screen bg-gray-900">
       <Routes>
-        <Route path="/tasks" element={<div>Tasks Page</div>} />
-        <Route path="/notes" element={<div>Notes Page</div>} />
-        <Route path="/calendar" element={<div>Calendar Page</div>} />
+        <Route path="/" element={<HomeDashboard />} />
+        <Route path="/tasks" element={<HomeDashboard />}>
+          <Route index element={<div className="p-4 text-white"><h1 className="text-2xl font-bold mb-4">Tasks Page</h1></div>} />
+        </Route>
+        <Route path="/notes" element={<HomeDashboard />}>
+          <Route index element={<div className="p-4 text-white"><h1 className="text-2xl font-bold mb-4">Notes Page</h1></div>} />
+        </Route>
+        <Route path="/calendar" element={<HomeDashboard />}>
+          <Route index element={<div className="p-4 text-white"><h1 className="text-2xl font-bold mb-4">Calendar Page</h1></div>} />
+        </Route>
       </Routes>
     </div>
   );
