@@ -2,9 +2,9 @@
 
 #root {
   max-width: 3000px;
-  height: 1000px;
+  height: 950px;
   margin: 0;
-  padding: 1rem;
+  padding: 0rem;
   text-align: center;
   font-family: 'Audiowide', sans-serif;
 }

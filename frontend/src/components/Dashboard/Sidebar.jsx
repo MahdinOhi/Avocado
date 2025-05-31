@@ -14,7 +14,7 @@ export default function Sidebar() {
           <p className="text-sm text-white">Placeholder</p>
         </div>
 
-        <nav className="mt-4 space-y-2">
+        <nav className="mt-4 space-y-2 rounded-3xl bg-[#6b6b14] h-full pt-20">
           <SidebarLink text="Dashboard" to="/" active={location.pathname === "/"} />
           <SidebarLink text="Tasks" to="/tasks" active={location.pathname === "/tasks"} />
           <SidebarLink text="Notes" to="/notes" active={location.pathname === "/notes"} />

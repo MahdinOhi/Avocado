@@ -12,8 +12,8 @@ const Searchbar = ({ onSearch }) => {
     };
 
     return (
-        <div style={{ marginBottom: '2.25rem', width: '50%', position: 'relative', marginLeft: 'auto', marginRight: 'auto' }}>
-            <div style={{ position: 'absolute', left: '10px', top: '50%', transform: 'translateY(-50%)', color: 'gray' }}>
+        <div style={{ marginBottom: '2.25rem', width: '50%', position: 'relative', marginLeft: 'auto', marginRight: 'auto', marginTop:'12px' }}>
+            <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'gray' }}>
                 <SearchIcon />
             </div>
             <input
