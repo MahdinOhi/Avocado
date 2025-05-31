@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import SidebarLink from "./SidebarLink";
+import SidebarIcons from "./SidebarIcons";
 
 export default function Sidebar() {
   const location = useLocation();
@@ -21,11 +22,7 @@ export default function Sidebar() {
         </nav>
       </div>
 
-      <div className="flex justify-around px-2 text-xl">
-        <span className="cursor-pointer">⚙️</span>
-        <span className="cursor-pointer">👤</span>
-        <span className="cursor-pointer">⬅️</span>
-      </div>
+      <SidebarIcons />
     </aside>
   );
 }

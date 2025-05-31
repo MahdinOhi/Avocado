@@ -1,0 +1,22 @@
+import React from "react";
+import SettingsIcon from "@mui/icons-material/Settings";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
+const SidebarIcons = () => {
+    return (
+        <div className="flex justify-around px-2 text-xl">
+            <span className="cursor-pointer">
+                <SettingsIcon sx={{ fontSize: 40, color: "white" }} />
+            </span>
+            <span className="cursor-pointer">
+                <AccountCircleIcon sx={{ fontSize: 40, color: "white" }} />
+            </span>
+            <span className="cursor-pointer">
+                <ArrowBackIcon sx={{ fontSize: 40, color: "white" }} />
+            </span>
+        </div>
+    );
+};
+
+export default SidebarIcons;
