@@ -7,7 +7,7 @@ import MiniCalendar from './MiniCalendar';
 import RecentVaults from './RecentVaults';
 import MyTasks from './MyTasks';
 import UpcomingSchedule from './UpcomingSchedule';
-import SearchBar from './SearchBar';
+import SearchBar from '../Layout/SearchBar';
 import MobileHeader from './MobileHeader';
 import Sidebar from './Sidebar';
 
