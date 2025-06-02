@@ -1,38 +1,19 @@
-import React, { useState } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
+import React from 'react';
+import { Search } from 'lucide-react';
 
-const Searchbar = ({ onSearch }) => {
-    const [query, setQuery] = useState('');
+const SearchBar = React.memo(({ searchQuery, onSearchChange }) => {
+  return (
+    <div className='relative mb-6'>
+      <Search className='absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5' />
+      <input
+        type='text'
+        placeholder='Search through your notes, tasks, and projects'
+        value={searchQuery}
+        onChange={(e) => onSearchChange(e.target.value)}
+        className='w-full pl-12 pr-4 py-3 bg-white rounded-2xl shadow-sm border-0 focus:ring-2 focus:ring-blue-300 focus:outline-none text-gray-700'
+      />
+    </div>
+  );
+});
 
-    const handleInputChange = (e) => {
-        setQuery(e.target.value);
-        if (onSearch) {
-            onSearch(e.target.value);
-        }
-    };
-
-    return (
-        <div style={{ marginBottom: '2.25rem', width: '50%', position: 'relative', marginLeft: 'auto', marginRight: 'auto', marginTop:'12px' }}>
-            <div style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'gray' }}>
-                <SearchIcon />
-            </div>
-            <input
-                type="text"
-                value={query}
-                onChange={handleInputChange}
-                placeholder="Search through your notes, tasks, and projects"
-                style={{
-                    width: '100%',
-                    padding: '0.75rem 0.5rem 0.75rem 40px', // left padding makes space for the icon
-                    borderRadius: '12px',
-                    border: '3px solid black',
-                    fontSize: '0.875rem',
-                    outline: 'none',
-                    backgroundColor: 'white'
-                }}
-            />
-        </div>
-    );
-};
-
-export default Searchbar;
+export default SearchBar;
