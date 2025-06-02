@@ -1,12 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap');
 
+html,
+body,
 #root {
-  max-width: 3000px;
-  height: 1000px;
+  width: 100vw;
+  min-height: 100vh;
   margin: 0;
-  padding: 1rem;
-  text-align: center;
-  font-family: 'Audiowide', sans-serif;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(to right, #ecfae5, #ddf6d2, #cae8bd, #b0db9c);
 }
 
 .logo {
