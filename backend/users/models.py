@@ -57,10 +57,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-    # ------------------------------
-    # ✔️ Auth Functions
-    # ------------------------------
-
+    # Auth Functions
     def auth(self, password: str) -> bool:
         """Validate given password"""
         return self.check_password(password)
