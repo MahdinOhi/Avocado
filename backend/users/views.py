@@ -1,24 +1,21 @@
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.http import HttpResponse
 from django.http import JsonResponse
-from rest_framework.decorators import api_view
-from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth.decorators import login_required
 
+
+class ProtectedView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        return Response({"msg": "You're authenticated!", "user": str(request.user)})
+    
+    
 
 def home(request):
-    return JsonResponse({"message": "Welcome to the Avocado API."})
+    return HttpResponse("Welcome to the User Home Page")
 
-
-@api_view(['POST'])
 def custom_login(request):
-    serializer = TokenObtainPairSerializer(data=request.data)
-    try:
-        serializer.is_valid(raise_exception=True)
-        return JsonResponse({
-            "message": "Login successful",
-            "access": serializer.validated_data["access"],
-            "refresh": serializer.validated_data["refresh"]
-        }, status=200)
-    except Exception as e:
-        return JsonResponse({"message": "Login failed", "details": str(e)}, status=401)
-
-    
+    return JsonResponse({"message": "Custom login works!"})

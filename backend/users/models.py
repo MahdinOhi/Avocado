@@ -29,9 +29,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('user', 'User'),
         ('admin', 'Admin'),
         ('superadmin', 'Superadmin'),
+        
     ]
 
-    userId = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    userId = models.CharField(max_length=50, unique=True, editable=False)
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
     passwordHash = models.CharField(max_length=255)  # Not used directly (Django uses password field internally)
@@ -48,6 +49,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    is_verified = models.BooleanField(default=False)
 
     objects = CustomUserManager()
 
