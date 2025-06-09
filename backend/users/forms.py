@@ -18,4 +18,4 @@ class CustomUserForm(forms.ModelForm):
 
     def generate_user_id(self):
         import uuid
-        return str(uuid.uuid4())
+        return str(uuid.uuid4()) 
