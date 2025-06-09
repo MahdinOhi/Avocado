@@ -29,13 +29,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('user', 'User'),
         ('admin', 'Admin'),
         ('superadmin', 'Superadmin'),
-        
     ]
 
-    userId = models.CharField(max_length=50, unique=True, editable=False)
+    # ✅ Auto-generate a unique UUID string for userId
+    userId = models.CharField(max_length=50, unique=True, editable=False, default=uuid.uuid4)
+
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
-    passwordHash = models.CharField(max_length=255)  # Not used directly (Django uses password field internally)
+
+    # ✅ Remove this field. Django internally handles passwords via AbstractBaseUser
+    # passwordHash = models.CharField(max_length=255) ❌ REMOVE THIS LINE
+
     createdAt = models.DateTimeField(default=timezone.now)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='user')
     isVerified = models.BooleanField(default=False)
@@ -53,11 +57,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = ['email']
 
     def __str__(self):
-        return self.email
+        return self.username
 
     # Auth Functions
     def auth(self, password: str) -> bool:
