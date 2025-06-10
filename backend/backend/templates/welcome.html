@@ -3,23 +3,106 @@
   <head>
     <meta charset="UTF-8" />
     <title>Welcome | Avocado Backend</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap");
+
+      body,
+      html {
+        margin: 0;
+        height: 100%;
+        font-family: "Orbitron", monospace, Arial, sans-serif;
+        color: #c0c7ff;
+        background: linear-gradient(270deg, #0b0f2a, #1a1e4a, #0b0f2a);
+        background-size: 600% 600%;
+        animation: gradientBG 20s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        user-select: none;
+        padding: 40px 20px;
+        height: 100vh;
+        box-sizing: border-box;
+      }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      h1 {
+        font-size: 3.5rem;
+        text-shadow: 0 0 8px #5c67ff, 0 0 20px #8a9bff;
+        margin-bottom: 0.2em;
+      }
+
+      p {
+        font-size: 1.3rem;
+        margin-top: 0;
+        margin-bottom: 1.8em;
+        text-shadow: 0 0 6px #5c67ff99;
+        max-width: 720px;
+        line-height: 1.6;
+      }
+
+      .about {
+        font-size: 1.1rem;
+        max-width: 720px;
+        margin-bottom: 3em;
+        color: #aab3ffdd;
+        text-shadow: 0 0 4px #4f56b8aa;
+        line-height: 1.5;
+        user-select: text;
+      }
+
+      a {
+        padding: 14px 36px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: #e2e8ff;
+        background: #161b40;
+        border: 2px solid #5c67ff;
+        border-radius: 8px;
+        text-decoration: none;
+        box-shadow: 0 0 10px #5c67ff, 0 0 20px #8a9bff, inset 0 0 8px #5c67ff;
+        transition: all 0.3s ease;
+        user-select: none;
+      }
+
+      a:hover,
+      a:focus {
+        color: #c0c7ff;
+        background: #252d70;
+        box-shadow: 0 0 20px #a0a9ff, 0 0 30px #b0bfff, inset 0 0 12px #a0a9ff;
+        outline: none;
+      }
+
+      a:active {
+        box-shadow: 0 0 30px #9199ff, 0 0 40px #a0a9ff, inset 0 0 14px #9199ff;
+        transform: scale(0.97);
+        transition: none;
+      }
+    </style>
   </head>
-  <body style="font-family: Arial; text-align: center; margin-top: 50px">
+  <body>
     <h1>🥑 Welcome to Avocado Backend!</h1>
     <p>Your backend is running successfully.</p>
-    <a
-      href="/admin/"
-      style="
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #4caf50;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-weight: bold;
-      "
-      >Go to Admin Panel</a
-    >
+
+    <div class="about">
+      A split-screen workstation web app where users can read PDFs, web pages,
+      or YouTube videos, pomodoro &amp; calendar on one side, and take notes,
+      jots, or tasks on the other - supporting highlighting, rich-text editing,
+      and fast rendering like Replit &amp; Google Docs.
+    </div>
+
+    <a href="/admin/" tabindex="0">Go to Admin Panel</a>
   </body>
 </html>

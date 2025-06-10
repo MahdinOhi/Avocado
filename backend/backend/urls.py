@@ -1,3 +1,4 @@
+# backend\backend\urls.py
 from django.contrib import admin
 from django.urls import path, include
 from .views import welcome_backend  # import your view
@@ -10,4 +11,7 @@ urlpatterns = [
     path('users/', include('users.urls')),
     # add welcome page here
     path('', welcome_backend, name='welcome-backend'),
+    path('auth/', include('djoser.urls')),
+    # This line provides JWT endpoints
+    path('auth/', include('djoser.urls.jwt')),
 ]

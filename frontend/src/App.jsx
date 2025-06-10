@@ -1,19 +1,24 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import HomeDashboard from './components/Dashboard/HomeDashboard';
+import LoginPage from './components/Auth/Login/LoginPage';
+import ProtectedRoute from './components/Utils/ProtectedRoute';
 import './App.css';
 import './index.css';
 
 export default function App() {
   return (
-    <div>
-      <HomeDashboard />
-      <Routes>
-        {/* Add other routes here */}
-        <Route path='/tasks' element={<div>Tasks Page</div>} />
-        <Route path='/notes' element={<div>Notes Page</div>} />
-        <Route path='/calendar' element={<div>Calendar Page</div>} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/login" element={<LoginPage />} />
+
+      <Route
+        path="/*"
+        element={
+          <ProtectedRoute>
+            <HomeDashboard />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
