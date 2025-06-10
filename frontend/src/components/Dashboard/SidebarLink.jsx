@@ -9,8 +9,8 @@ export default function SidebarLink({ text, to, active, icon: Icon }) {
         w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 cursor-pointer
         ${
           active
-            ? 'bg-white/25 text-white shadow-lg font-semibold backdrop-blur-sm border border-white/30'
-            : 'text-white/90 hover:bg-white/15 hover:text-white hover:shadow-md'
+            ? 'bg-black/25 text-black shadow-lg font-semibold backdrop-blur-sm border border-black/30'
+            : 'text-black/90 hover:bg-black/15 hover:text-black hover:shadow-md'
         }
       `}
       style={{

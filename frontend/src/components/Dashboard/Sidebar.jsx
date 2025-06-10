@@ -10,8 +10,10 @@ import {
   ArrowRight,
   X,
   Calendar,
+  LockOpenIcon,
 } from 'lucide-react';
 import SidebarLink from './SidebarLink';
+
 
 export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
   const location = useLocation();
@@ -23,6 +25,7 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
     { icon: CheckSquare, text: 'Tasks', to: '/tasks' },
     { icon: FileText, text: 'Notes', to: '/notes' },
     { icon: Calendar, text: 'Calendar', to: '/calendar' },
+    { icon: LockOpenIcon, text: 'Login', to: '/login' },
   ];
 
   const toggleCollapse = () => {
@@ -45,14 +48,12 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
 
       <aside
         className={`
-          ${
-            isCollapsed ? 'w-0 lg:w-0' : 'w-64'
+          ${isCollapsed ? 'w-0 lg:w-0' : 'w-64'
           } bg-gradient-to-b from-[#B0DB9C] to-[#CAE8BD] flex flex-col justify-between p-4 transition-all duration-300 ease-in-out overflow-hidden
           lg:translate-x-0 lg:relative lg:z-0
-          ${
-            isMobileMenuOpen
-              ? 'translate-x-0'
-              : '-translate-x-full lg:translate-x-0'
+          ${isMobileMenuOpen
+            ? 'translate-x-0'
+            : '-translate-x-full lg:translate-x-0'
           }
           ${isCollapsed ? 'lg:-translate-x-full' : ''}
           fixed lg:relative z-30 h-full rounded-l-3xl

@@ -1,5 +1,5 @@
 # Wait for 5 seconds before starting servers
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 2
 
 # Start Django server
 Start-Process powershell -ArgumentList @"

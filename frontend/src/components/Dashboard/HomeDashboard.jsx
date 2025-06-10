@@ -11,6 +11,7 @@ import SearchBar from '../Layout/SearchBar';
 import MobileHeader from './MobileHeader';
 import Sidebar from './Sidebar';
 
+
 // Main Dashboard Component
 export default function HomeDashboard() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
