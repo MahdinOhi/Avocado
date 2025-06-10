@@ -19,8 +19,8 @@ class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, email, username, password=None, **extra_fields):
         extra_fields.setdefault('role', 'superadmin')
-        extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_staff', True)  # ✅ Added missing is_staff
         return self.create_user(email, username, password, **extra_fields)
 
 
@@ -31,29 +31,34 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('superadmin', 'Superadmin'),
     ]
 
-    # ✅ Auto-generate a unique UUID string for userId
-    userId = models.CharField(max_length=50, unique=True, editable=False, default=uuid.uuid4)
+    PROFESSION_CHOICES = [
+        ('student', 'Student'),
+        ('researcher', 'Researcher'),
+        ('professional', 'Professional'),
+    ]
 
+    userId = models.CharField(max_length=50, unique=True, editable=False, default=uuid.uuid4)
     username = models.CharField(max_length=150, unique=True)
     email = models.EmailField(unique=True)
 
-    # ✅ Remove this field. Django internally handles passwords via AbstractBaseUser
-    # passwordHash = models.CharField(max_length=255) ❌ REMOVE THIS LINE
+    # ✅ Fixed field name to match form and admin
+    dateOfBirth = models.DateField(null=True, blank=True)
+    profession = models.CharField(max_length=20, choices=PROFESSION_CHOICES, default='student')
 
     createdAt = models.DateTimeField(default=timezone.now)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='user')
     isVerified = models.BooleanField(default=False)
     resetToken = models.CharField(max_length=255, blank=True, null=True)
-    sessionTokens = models.JSONField(default=list, blank=True)  # list of tokens
+    sessionTokens = models.JSONField(default=list, blank=True)
     autosave = models.BooleanField(default=True)
     noteCount = models.PositiveIntegerField(default=0)
     taskCount = models.PositiveIntegerField(default=0)
-    activityLog = models.JSONField(default=list, blank=True)  # list of dicts
-    notes = models.JSONField(default=dict, blank=True)  # {documents: [{...}]}
+    activityLog = models.JSONField(default=list, blank=True)
+    notes = models.JSONField(default=dict, blank=True)
 
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_verified = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)  # ✅ Added missing is_staff field
+    # ✅ Removed duplicate is_verified field (already have isVerified)
 
     objects = CustomUserManager()
 
@@ -63,13 +68,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.username
 
-    # Auth Functions
     def auth(self, password: str) -> bool:
-        """Validate given password"""
         return self.check_password(password)
 
     def logout(self, session_token: str) -> bool:
-        """Remove token from sessionTokens array"""
         if session_token in self.sessionTokens:
             self.sessionTokens.remove(session_token)
             self.save()
@@ -77,7 +79,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return False
 
     def updateSettings(self, **kwargs) -> bool:
-        """Apply user preference updates (like theme, autosave)"""
         allowed_fields = {'autosave', 'noteCount', 'taskCount', 'activityLog', 'notes'}
         changed = False
         for key, value in kwargs.items():

@@ -6,16 +6,12 @@ class CustomUserForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password']
+        fields = ['username', 'email', 'password', 'dateOfBirth', 'profession']  # ✅ Fixed field name
 
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data['password'])  # Password hashing
-        user.userId = self.generate_user_id()  # Set unique userId manually
+        # ✅ Removed manual userId generation - it's handled by default in model
         if commit:
             user.save()
         return user
-
-    def generate_user_id(self):
-        import uuid
-        return str(uuid.uuid4()) 
