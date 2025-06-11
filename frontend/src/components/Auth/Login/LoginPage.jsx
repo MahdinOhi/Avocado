@@ -127,7 +127,7 @@ const LoginPage = () => {
                     <div className="mt-6 text-center">
                         <p className="text-gray-500 text-sm">
                             Already have an account?{' '}
-                            <a href="#" className="text-green-600 hover:text-green-700 font-medium">
+                            <a href="/signup" className="text-green-600 hover:text-green-700 font-medium">
                                 Log In
                             </a>
                         </p>
