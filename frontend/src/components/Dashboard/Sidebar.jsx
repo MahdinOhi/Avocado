@@ -36,7 +36,7 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
         <div className='hidden lg:flex fixed left-4 top-4 z-40'>
           <button
             onClick={toggleCollapse}
-            className='p-3 bg-[#B0DB9C] text-white rounded-xl shadow-lg hover:bg-[#CAE8BD] transition-colors'
+            className='p-3 bg-[#B0DB9C] text-black rounded-xl shadow-lg hover:bg-[#CAE8BD] transition-colors'
           >
             <ArrowRight className='w-5 h-5' />
           </button>
@@ -47,7 +47,7 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
         className={`
           ${
             isCollapsed ? 'w-0 lg:w-0' : 'w-64'
-          } bg-gradient-to-b from-[#B0DB9C] to-[#CAE8BD] flex flex-col justify-between p-4 transition-all duration-300 ease-in-out overflow-hidden
+          } bg-[#B0DB9C]  flex flex-col justify-between p-4 transition-all duration-300 ease-in-out overflow-hidden
           lg:translate-x-0 lg:relative lg:z-0
           ${
             isMobileMenuOpen
@@ -55,11 +55,12 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
               : '-translate-x-full lg:translate-x-0'
           }
           ${isCollapsed ? 'lg:-translate-x-full' : ''}
-          fixed lg:relative z-30 h-full rounded-l-3xl
+          fixed lg:relative z-30 h-full 
         `}
         style={{
-          boxShadow:
-            '4px 0 8px -2px rgba(176, 219, 156, 0.2), inset -1px 0 0 rgba(255, 255, 255, 0.2)',
+          background: 'transparent',
+          boxShadow: 'none',
+          border: 'none',
         }}
       >
         <div>
@@ -67,13 +68,13 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
           <div className='flex justify-between items-center mb-4'>
             <button
               onClick={toggleCollapse}
-              className='hidden lg:block p-2 text-white hover:bg-white/20 rounded-md transition-colors'
+              className='hidden lg:block p-2 text-black hover:bg-white/20 rounded-md transition-colors'
             >
               <ArrowLeft className='w-5 h-5' />
             </button>
             <button
               onClick={onToggleMenu}
-              className='lg:hidden p-2 text-white hover:bg-white/20 rounded-md'
+              className='lg:hidden p-2 text-black hover:bg-white/20 rounded-md'
             >
               <X className='w-5 h-5' />
             </button>
@@ -86,14 +87,14 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
                 <span className='text-white text-lg font-bold'>👤</span>
               </div>
               <div>
-                <p className='font-semibold text-white text-lg'>Welcome</p>
-                <p className='text-sm text-white/90'>Mahdin Ohi</p>
+                <p className='font-semibold text-black text-lg'>Welcome</p>
+                <p className='text-sm text-black/90'>Mahdin Ohi</p>
               </div>
             </div>
           </div>
 
           {/* Navigation */}
-          <nav className='mt-6 space-y-3'>
+          <nav className='mt-6 space-y-3 '>
             {navItems.map((item, index) => (
               <SidebarLink
                 key={index}
@@ -108,10 +109,10 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
 
         {/* Bottom Icons */}
         <div className='flex justify-around items-center pt-6 border-t border-white/20'>
-          <button className='p-3 text-white hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
+          <button className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
             <Settings className='w-5 h-5' />
           </button>
-          <button className='p-3 text-white hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
+          <button className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
             <User className='w-5 h-5' />
           </button>
         </div>
