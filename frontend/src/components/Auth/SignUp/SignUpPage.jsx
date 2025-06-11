@@ -1,109 +1,99 @@
 import React, { useState } from 'react';
-import LeftPanel from './LeftPanel';
-import InputField from './InputField';
+import { useNavigate } from 'react-router-dom';
 
+const SignupPage = () => {
+  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [dob, setDob] = useState('');
+  const [role, setRole] = useState('student');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setMessage('');
 
-function SignUpPage() {
-  const [form, setForm] = useState({
-    firstName: '', lastName: '', username: '',
-    email: '', password: '', dateOfBirth: '', userType: 'Student'
-  });
+    try {
+      const response = await fetch('http://localhost:8000/auth/users/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          username,
+          email,
+          password,
+          date_of_birth: dob,
+          role
+        })
+      });
 
-  const handle = field => e =>
-    setForm(prev => ({ ...prev, [field]: e.target.value }));
+      if (!response.ok) {
+        const errorData = await response.json();
+        const errorMessage = errorData.detail || Object.values(errorData)[0][0] || 'Signup failed.';
+        throw new Error(errorMessage);
+      }
 
+      setMessage('Signup successful! Redirecting to login...');
+      setTimeout(() => navigate('/login'), 2000);
 
-  const [agreeToTerms, setAgreeToTerms] = useState(false);
-  const [agreeToMarketing, setAgreeToMarketing] = useState(false);
-
-  const handleSubmit = () => {
-    if (!agreeToTerms) return alert('Please agree to Terms & Privacy');
-    console.log({ form, agreeToMarketing });
-    alert('Account created successfully!');
+    } catch (err) {
+      setError(err.message || 'Unexpected error during signup.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="min-h-screen bg-black grid lg:grid-cols-2">
-      <LeftPanel />
-      <div className="bg-black flex items-center justify-center p-8">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-            Sign up now
-          </h2>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 lg:p-8 font-['Inter']">
+      <div className="bg-white rounded-3xl shadow-xl w-full max-w-3xl p-10">
+        <h2 className="text-3xl font-bold text-gray-800 mb-6">Create Your Account</h2>
 
-          <div className="grid grid-cols-2 gap-4">
-            <InputField label="First name" value={form.firstName} onChange={handle('firstName')} placeholder="First name" required />
-            <InputField label="Last name" value={form.lastName} onChange={handle('lastName')} placeholder="Last name" required />
-          </div>
-          <InputField label="Username" value={form.username} onChange={handle('username')} placeholder="Username" required />
-          <InputField label="Email address" type="email" value={form.email} onChange={handle('email')} placeholder="Email address" required />
-          <InputField label="Date of birth" type="date" value={form.dateOfBirth} onChange={handle('dateOfBirth')} required />
-          <InputField
-            label="Password"
-            type={showPassword ? 'text' : 'password'} // updated to toggle type
-            value={form.password}
-            onChange={handle('password')}
-            placeholder="Password"
-            required
-            showPassword={showPassword}
-            onTogglePassword={toggleShow}
-          />
-          <p className="text-xs text-gray-500 mb-4">
-            Use 8 or more characters with a mix of letters, numbers & symbols
-          </p>
+        <form onSubmit={handleSignup} className="space-y-4">
+          <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)} required className="w-full px-4 py-3 border rounded-lg" />
+          <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} required className="w-full px-4 py-3 border rounded-lg" />
+          <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required className="w-full px-4 py-3 border rounded-lg" />
+          <input type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} required className="w-full px-4 py-3 border rounded-lg" />
+          <input type="date" placeholder="Date of Birth" value={dob} onChange={e => setDob(e.target.value)} required className="w-full px-4 py-3 border rounded-lg" />
 
-          
-
-          <div className="mb-4">
-            <label className="flex items-start space-x-2">
-              <input
-                type="checkbox"
-                checked={agreeToTerms}
-                onChange={e => setAgreeToTerms(e.target.checked)}
-                required
-                className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-              />
-              <span className="text-sm text-gray-600">
-                By creating an account, I agree to our{' '}
-                <a href="#" className="text-blue-600 hover:underline">Terms</a> and{' '}
-                <a href="#" className="text-blue-600 hover:underline">Privacy</a>.
-              </span>
-            </label>
+          <div className="flex justify-between space-x-2">
+            {['student', 'researcher', 'professional'].map(opt => (
+              <label
+                key={opt}
+                className={`flex-1 text-center border rounded-lg py-2 cursor-pointer ${role === opt ? 'bg-green-600 text-white font-semibold' : 'bg-white'
+                  }`}
+              >
+                <input
+                  type="radio"
+                  name="role"
+                  value={opt}
+                  checked={role === opt}
+                  onChange={() => setRole(opt)}
+                  className="hidden"
+                />
+                {opt.charAt(0).toUpperCase() + opt.slice(1)}
+              </label>
+            ))}
           </div>
 
-          <div className="mb-6">
-            <label className="flex items-start space-x-2">
-              <input
-                type="checkbox"
-                checked={agreeToMarketing}
-                onChange={e => setAgreeToMarketing(e.target.checked)}
-                className="mt-1 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-              />
-              <span className="text-sm text-gray-600">
-                I consent to receive SMS & emails about features, events, promotions.
-              </span>
-            </label>
-          </div>
 
-          <button
-            type="button"
-            onClick={handleSubmit}
-            className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-4 rounded-lg transition-colors"
-          >
-            Sign up
+          {error && <div className="bg-red-100 border text-red-700 p-2 rounded">{error}</div>}
+          {message && <div className="bg-green-100 border text-green-700 p-2 rounded">{message}</div>}
+
+          <button type="submit" className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50" disabled={loading}>
+            {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
 
-          <p className="text-center text-sm text-gray-600 mt-4">
-            Already have an account?{' '}
-            <a href="#" className="text-blue-600 hover:underline font-medium">
-              Log in
-            </a>
-          </p>
-        </div>
+          <p className="text-sm text-center text-gray-600">Already have an account? <a href="/login" className="text-green-600 font-medium">Log In</a></p>
+        </form>
       </div>
     </div>
   );
-}
+};
 
-export default SignUpPage;
+export default SignupPage;

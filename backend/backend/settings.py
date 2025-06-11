@@ -149,6 +149,7 @@ DJOSER = {
         'user_create': 'users.serializers.UserCreateSerializer',
         # If you have a custom user serializer
         'user': 'users.serializers.UserSerializer',
+        'user': 'users.serializers.RegisterSerializer',
         # If you have a custom user serializer
         'current_user': 'users.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
