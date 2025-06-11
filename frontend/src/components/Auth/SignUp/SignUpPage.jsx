@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import hooks from './hooks';
 import LeftPanel from './LeftPanel';
 import InputField from './InputField';
-import UserTypeToggle from './UserTypeToggle';  
-import { useToggle } from './hooks';
+
+
 
 function SignUpPage() {
   const [form, setForm] = useState({
     firstName: '', lastName: '', username: '',
     email: '', password: '', dateOfBirth: '', userType: 'Student'
   });
+
   const handle = field => e =>
     setForm(prev => ({ ...prev, [field]: e.target.value }));
 
-  const [showPassword, toggleShow] = useToggle();
+
   const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [agreeToMarketing, setAgreeToMarketing] = useState(false);
 
@@ -41,7 +41,7 @@ function SignUpPage() {
           <InputField label="Date of birth" type="date" value={form.dateOfBirth} onChange={handle('dateOfBirth')} required />
           <InputField
             label="Password"
-            type="password"
+            type={showPassword ? 'text' : 'password'} // updated to toggle type
             value={form.password}
             onChange={handle('password')}
             placeholder="Password"
@@ -53,10 +53,7 @@ function SignUpPage() {
             Use 8 or more characters with a mix of letters, numbers & symbols
           </p>
 
-          <UserTypeToggle
-            selectedType={form.userType}
-            onTypeChange={type => setForm(prev => ({ ...prev, userType: type }))}
-          />
+          
 
           <div className="mb-4">
             <label className="flex items-start space-x-2">
