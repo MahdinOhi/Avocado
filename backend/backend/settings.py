@@ -145,12 +145,8 @@ DJOSER = {
     'USERNAME_CHANGED_EMAIL_CONFIRMATION': False,
     'TOKEN_MODEL': None,  # Important: Set to None when using JWT
     'SERIALIZERS': {
-        # If you have a custom user create serializer
-        'user_create': 'users.serializers.UserCreateSerializer',
-        # If you have a custom user serializer
+        'user_create': 'users.serializers.RegisterSerializer',
         'user': 'users.serializers.UserSerializer',
-        'user': 'users.serializers.RegisterSerializer',
-        # If you have a custom user serializer
         'current_user': 'users.serializers.UserSerializer',
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
         'token': 'djoser.serializers.TokenSerializer',

@@ -11,7 +11,5 @@ urlpatterns = [
     path('users/', include('users.urls')),
     # add welcome page here
     path('', welcome_backend, name='welcome-backend'),
-    path('auth/', include('djoser.urls')),
-    # This line provides JWT endpoints
-    path('auth/', include('djoser.urls.jwt')),
+    # Removed duplicate entries for djoser.urls and djoser.urls.jwt
 ]
