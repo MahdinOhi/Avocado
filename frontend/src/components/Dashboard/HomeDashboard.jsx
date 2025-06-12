@@ -35,25 +35,28 @@ export default function HomeDashboard() {
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
-    <div className='min-h-screen bg-gradient-to-br from-[#DDF6D2] via-[#CAE8BD] to-[#B0DB9C] p-2'>
-      <div className='w-full h-screen bg-gradient-to-r from-[#ECFAE5] to-[#DDF6D2] rounded-3xl shadow-2xl overflow-hidden border border-[#CAE8BD]'>
-        <div className='flex h-full'>
-          {/* Mobile Menu Overlay */}
-          {isMobileMenuOpen && (
-            <div
-              className='fixed inset-0 bg-black/50 z-20 lg:hidden backdrop-blur-sm'
-              onClick={toggleMobileMenu}
-            />
-          )}
+    <div className='min-h-screen bg-[#B0DB9C] p-4'>
+      <div className='flex h-screen gap-4'>
+        {/* Mobile Menu Overlay */}
+        {isMobileMenuOpen && (
+          <div
+            className='fixed inset-0 bg-black/50 z-20 lg:hidden backdrop-blur-sm'
+            onClick={toggleMobileMenu}
+          />
+        )}
 
-          {/* Sidebar */}
+        {/* Sidebar */}
+        <div className='flex-shrink-0 '>
+          
           <Sidebar
             isMobileMenuOpen={isMobileMenuOpen}
             onToggleMenu={toggleMobileMenu}
           />
+        </div>
 
-          {/* Main Content */}
-          <main className='flex-1 p-4 lg:p-6 bg-gradient-to-br from-[#ECFAE5]/50 to-[#DDF6D2]/30 flex flex-col h-full'>
+        {/* Main Content - Now as a separate rounded box */}
+        <div className='flex-1'>
+          <main className='h-full bg-gradient-to-br from-[#ECFAE5] to-[#DDF6D2] rounded-3xl shadow-2xl border border-[#CAE8BD] p-4 lg:p-6 flex flex-col overflow-hidden'>
             {/* Mobile Header */}
             <MobileHeader onToggleMenu={toggleMobileMenu} />
 
