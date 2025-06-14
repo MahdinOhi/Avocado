@@ -1,41 +1,29 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import {Link} from 'react-router-dom';
 import {
   CheckSquare,
-  FileText,
   LayoutDashboard,
+  Lock,
   Settings,
   User,
   ArrowLeft,
   ArrowRight,
-  X,
-  Calendar,
-  LockOpenIcon,
+  X
 } from 'lucide-react';
-import SidebarLink from './SidebarLink';
+import SidebarLink from './profilebarLink'; 
 
-
-export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
-  const location = useLocation();
+export default function profileBar({ isMobileMenuOpen, onToggleMenu }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  // Navigation items with icons
   const navItems = [
-    { icon: LayoutDashboard, text: 'Dashboard', to: '/' },
-    { icon: CheckSquare, text: 'Tasks', to: '/tasks' },
-    { icon: FileText, text: 'Notes', to: '/notes' },
-    { icon: Calendar, text: 'Calendar', to: '/calendar' },
-    { icon: LockOpenIcon, text: 'Login', to: '/login' },
+    { icon: LayoutDashboard, text: 'Overview', to: '/profile' },
+    { icon: CheckSquare, text: 'Setting', to: '/profile/settings' },
+    { icon: Lock, text: 'LogOut', to: '/logout' },
   ];
 
-  const toggleCollapse = () => {
-    setIsCollapsed(!isCollapsed);
-  };
+  const toggleCollapse = () => setIsCollapsed(!isCollapsed);
 
   return (
     <>
-      {/* Desktop Collapsed State - Expand Button */}
       {isCollapsed && (
         <div className='hidden lg:flex fixed left-4 top-4 z-40'>
           <button
@@ -49,16 +37,12 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
 
       <aside
         className={`
-          ${
-            isCollapsed ? 'w-0 lg:w-0' : 'w-64'
-          } bg-[#B0DB9C]  flex flex-col justify-between p-4 transition-all duration-300 ease-in-out overflow-hidden
+          ${isCollapsed ? 'w-0 lg:w-0' : 'w-64'}
+          bg-[#B0DB9C] flex flex-col p-4 transition-all duration-300 ease-in-out overflow-hidden
           lg:translate-x-0 lg:relative lg:z-0
-          ${isMobileMenuOpen
-            ? 'translate-x-0'
-            : '-translate-x-full lg:translate-x-0'
-          }
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           ${isCollapsed ? 'lg:-translate-x-full' : ''}
-          fixed lg:relative z-30 h-full 
+          fixed lg:relative z-30 h-full
         `}
         style={{
           background: 'transparent',
@@ -66,8 +50,7 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
           border: 'none',
         }}
       >
-        <div>
-          {/* Mobile Close Button & Desktop Collapse Button */}
+        <div className='flex-1'>
           <div className='flex justify-between items-center mb-4'>
             <button
               onClick={toggleCollapse}
@@ -83,7 +66,6 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
             </button>
           </div>
 
-          {/* User Section */}
           <div className='px-4 py-6'>
             <div className='flex items-center gap-3 mb-2'>
               <div className='w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md'>
@@ -96,30 +78,25 @@ export default function Sidebar({ isMobileMenuOpen, onToggleMenu }) {
             </div>
           </div>
 
-          {/* Navigation */}
-          <nav className='mt-6 space-y-3 '>
+          <nav className='mt-6 space-y-3'>
             {navItems.map((item, index) => (
               <SidebarLink
                 key={index}
                 text={item.text}
-                to={item.to}
                 icon={item.icon}
-                active={location.pathname === item.to}
+                active={item.active}
               />
             ))}
           </nav>
         </div>
 
-        {/* Bottom Icons */}
         <div className='flex justify-around items-center pt-6 border-t border-white/20'>
           <button className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
             <Settings className='w-5 h-5' />
           </button>
-          <Link to ='/profile'>
           <button className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
             <User className='w-5 h-5' />
           </button>
-          </Link>
         </div>
       </aside>
     </>
