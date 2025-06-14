@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from 'react-router-dom';
 import {
   CheckSquare,
   LayoutDashboard,
@@ -24,16 +25,17 @@ export default function profileBar({ isMobileMenuOpen, onToggleMenu }) {
 
   return (
     <>
-      {isCollapsed && (
-        <div className='hidden lg:flex fixed left-4 top-4 z-40'>
-          <button
-            onClick={toggleCollapse}
-            className='p-3 bg-[#B0DB9C] text-black rounded-xl shadow-lg hover:bg-[#CAE8BD] transition-colors'
-          >
-            <ArrowRight className='w-5 h-5' />
-          </button>
-        </div>
-      )}
+       {/* Expand button when collapsed */}
+            {isCollapsed && (
+              <div className='hidden lg:flex fixed bottom-4 left-4 z-40'>
+                <button
+                  onClick={toggleCollapse}
+                  className='p-3 bg-[#B0DB9C] text-black rounded-xl shadow-lg hover:bg-[#CAE8BD] transition-colors'
+                >
+                  <ArrowRight className='w-5 h-5' />
+                </button>
+              </div>
+            )}
 
       <aside
         className={`
@@ -52,20 +54,10 @@ export default function profileBar({ isMobileMenuOpen, onToggleMenu }) {
       >
         <div className='flex-1'>
           <div className='flex justify-between items-center mb-4'>
-            <button
-              onClick={toggleCollapse}
-              className='hidden lg:block p-2 text-black hover:bg-white/20 rounded-md transition-colors'
-            >
-              <ArrowLeft className='w-5 h-5' />
-            </button>
-            <button
-              onClick={onToggleMenu}
-              className='lg:hidden p-2 text-black hover:bg-white/20 rounded-md'
-            >
-              <X className='w-5 h-5' />
-            </button>
+      
           </div>
 
+          {/* User Info */}
           <div className='px-4 py-6'>
             <div className='flex items-center gap-3 mb-2'>
               <div className='w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md'>
@@ -90,15 +82,26 @@ export default function profileBar({ isMobileMenuOpen, onToggleMenu }) {
           </nav>
         </div>
 
-        <div className='flex justify-around items-center pt-6 border-t border-white/20'>
-          <button className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
-            <Settings className='w-5 h-5' />
-          </button>
-          <button className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
-            <User className='w-5 h-5' />
-          </button>
-        </div>
-      </aside>
-    </>
+        {/* Bottom Icons + Toggle Button */}
+                {!isCollapsed && (
+                  <div className='flex items-center justify-center gap-2 pt-6 border-t border-white/20'>
+                    <button className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
+                      <Settings className='w-5 h-5' />
+                    </button>
+                     <Link to ='/profile'>
+                  <button className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'>
+                    <User className='w-5 h-5' />
+                  </button>
+                  </Link>
+                    <button
+                      onClick={toggleCollapse}
+                      className='p-3 text-black hover:bg-white/20 rounded-lg transition-colors shadow-sm'
+                    >
+                      <ArrowLeft className='w-5 h-5' />
+                    </button>
+                  </div>
+                )}
+              </aside>
+            </>
   );
 }
