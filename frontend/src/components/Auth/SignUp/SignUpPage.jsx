@@ -51,9 +51,9 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 lg:p-8 font-['Inter']">
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-3xl p-10">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Create Your Account</h2>
+    <div className="min-h-screen bg-[#c7e7c3] flex items-center justify-center p-6 font-['Inter']">
+      <div className="w-full max-w-sm bg-[#e4f1db] rounded-3xl shadow-inner p-6 drop-shadow-lg">
+        <h2 className="text-2xl font-bold text-[#305832] mb-4 select-none">Create Your Account</h2>
 
         <form onSubmit={handleSignup} className="space-y-4">
           <input
@@ -62,7 +62,7 @@ const SignupPage = () => {
             value={name}
             onChange={e => setName(e.target.value)}
             required
-            className="w-full px-4 py-3 border rounded-lg"
+            className="w-full px-4 py-3 rounded-lg bg-[#d8e9c5] border border-[#9bbd88] text-[#2f4b2d] placeholder-[#a9c68e] focus:outline-none focus:ring-2 focus:ring-[#9bbd88]"
           />
           <input
             type="text"
@@ -70,7 +70,7 @@ const SignupPage = () => {
             value={username}
             onChange={e => setUsername(e.target.value)}
             required
-            className="w-full px-4 py-3 border rounded-lg"
+            className="w-full px-4 py-3 rounded-lg bg-[#d8e9c5] border border-[#9bbd88] text-[#2f4b2d] placeholder-[#a9c68e] focus:outline-none focus:ring-2 focus:ring-[#9bbd88]"
           />
           <input
             type="email"
@@ -78,7 +78,7 @@ const SignupPage = () => {
             value={email}
             onChange={e => setEmail(e.target.value)}
             required
-            className="w-full px-4 py-3 border rounded-lg"
+            className="w-full px-4 py-3 rounded-lg bg-[#d8e9c5] border border-[#9bbd88] text-[#2f4b2d] placeholder-[#a9c68e] focus:outline-none focus:ring-2 focus:ring-[#9bbd88]"
           />
           <div className="relative">
             <input
@@ -87,12 +87,12 @@ const SignupPage = () => {
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 pr-12 border rounded-lg"
+              className="w-full px-4 py-3 pr-12 rounded-lg bg-[#d8e9c5] border border-[#9bbd88] text-[#2f4b2d] placeholder-[#a9c68e] focus:outline-none focus:ring-2 focus:ring-[#9bbd88]"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#4b662d] hover:text-[#2f4b2d]"
               aria-label="Toggle Password Visibility"
             >
               {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -104,14 +104,16 @@ const SignupPage = () => {
             value={dob}
             onChange={e => setDob(e.target.value)}
             required
-            className="w-full px-4 py-3 border rounded-lg"
+            className="w-full px-4 py-3 rounded-lg bg-[#d8e9c5] border border-[#9bbd88] text-[#2f4b2d] placeholder-[#a9c68e] focus:outline-none focus:ring-2 focus:ring-[#9bbd88]"
           />
 
           <div className="flex justify-between space-x-2">
             {['student', 'researcher', 'professional'].map(opt => (
               <label
                 key={opt}
-                className={`flex-1 text-center border rounded-lg py-2 cursor-pointer ${role === opt ? 'bg-green-600 text-white font-semibold' : 'bg-white'
+                className={`flex-1 text-center border rounded-lg py-2 cursor-pointer select-none ${role === opt
+                  ? 'bg-[#90be6d] text-white font-semibold'
+                  : 'bg-white text-[#305832]'
                   }`}
               >
                 <input
@@ -127,24 +129,24 @@ const SignupPage = () => {
             ))}
           </div>
 
-          {error && <div className="bg-red-100 border text-red-700 p-2 rounded">{error}</div>}
-          {message && <div className="bg-green-100 border text-green-700 p-2 rounded">{message}</div>}
+          {error && <p className="text-red-700 font-semibold text-sm">{error}</p>}
+          {message && <p className="text-green-700 font-semibold text-sm">{message}</p>}
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 disabled:opacity-50"
             disabled={loading}
+            className="w-full py-3 bg-[#90be6d] hover:bg-[#7cb243] rounded-lg text-white font-semibold transition disabled:opacity-50"
           >
             {loading ? 'Signing Up...' : 'Sign Up'}
           </button>
-
-          <p className="text-sm text-center text-gray-600">
-            Already have an account?{' '}
-            <a href="/login" className="text-green-600 font-medium">
-              Log In
-            </a>
-          </p>
         </form>
+
+        <p className="mt-6 text-center text-[#4b662d] select-none">
+          Already have an account?{' '}
+          <a href="/login" className="font-semibold underline hover:text-[#305832]">
+            Log In
+          </a>
+        </p>
       </div>
     </div>
   );
