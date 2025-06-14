@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
@@ -7,6 +8,7 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -41,71 +43,72 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-tr from-green-100 to-white flex items-center justify-center p-6 font-['Inter']">
-            <div className="w-full max-w-4xl bg-white rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 overflow-hidden">
-                {/* Left Side - Form */}
-                <div className="p-10">
-                    <div className="mb-6">
-                        <h2 className="text-4xl font-bold text-gray-800 mb-2">Welcome Back</h2>
-                        <p className="text-sm text-gray-500">Login to continue managing payments with Avocado</p>
-                    </div>
-                    <form onSubmit={handleLogin} className="space-y-5">
-                        <div>
-                            <label htmlFor="username" className="block text-sm font-semibold text-gray-700 mb-1">
-                                Username
-                            </label>
-                            <input
-                                type="text"
-                                id="username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                required
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 outline-none"
-                            />
-                        </div>
+        <div className="min-h-screen bg-[#c7e7c3] flex items-center justify-center p-8 font-['Inter']">
+            <div className="w-full max-w-md bg-[#e4f1db] rounded-3xl shadow-inner p-10 drop-shadow-lg">
+                <h2 className="text-3xl font-bold text-[#305832] mb-6 select-none">Welcome Back</h2>
+                <p className="mb-8 text-[#405940] select-none">
+                    Login to continue managing payments with <span className="font-semibold">Avocado</span>
+                </p>
 
-                        <div>
-                            <label htmlFor="password" className="block text-sm font-semibold text-gray-700 mb-1">
-                                Password
-                            </label>
+                <form onSubmit={handleLogin} className="space-y-6">
+                    <div>
+                        <label htmlFor="username" className="block mb-2 text-[#406639] font-medium">
+                            Username
+                        </label>
+                        <input
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
+                            className="w-full px-4 py-3 rounded-lg bg-[#d8e9c5] border border-[#9bbd88] text-[#2f4b2d] placeholder-[#a9c68e] focus:outline-none focus:ring-2 focus:ring-[#9bbd88]"
+                            placeholder="Enter your username"
+                        />
+                    </div>
+
+                    <div>
+                        <label htmlFor="password" className="block mb-2 text-[#406639] font-medium">
+                            Password
+                        </label>
+                        <div className="relative">
                             <input
-                                type="password"
                                 id="password"
+                                type={showPassword ? 'text' : 'password'}
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
-                                className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500 outline-none"
+                                className="w-full px-4 py-3 pr-12 rounded-lg bg-[#d8e9c5] border border-[#9bbd88] text-[#2f4b2d] placeholder-[#a9c68e] focus:outline-none focus:ring-2 focus:ring-[#9bbd88]"
+                                placeholder="Enter your password"
                             />
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#4b662d] hover:text-[#2f4b2d]"
+                                aria-label="Toggle Password Visibility"
+                            >
+                                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                            </button>
                         </div>
-
-                        {error && <div className="text-red-600 text-sm font-medium">{error}</div>}
-                        {message && <div className="text-green-600 text-sm font-medium">{message}</div>}
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition disabled:opacity-50"
-                        >
-                            {loading ? 'Logging in...' : 'Login'}
-                        </button>
-                    </form>
-
-                    <p className="mt-6 text-center text-sm text-gray-600">
-                        Don't have an account?{' '}
-                        <a href="/signup" className="text-green-600 font-semibold hover:underline">
-                            Sign up
-                        </a>
-                    </p>
-                </div>
-
-                {/* Right Side - Visual */}
-                <div className="hidden md:flex bg-gradient-to-br from-green-700 to-green-900 text-white p-10 flex-col justify-between">
-                    <div>
-                        <h1 className="text-4xl font-extrabold leading-tight mb-4">Avocado</h1>
-                        <p className="text-sm text-green-100">Streamlined financial freedom starts here.</p>
                     </div>
-                    <div className="text-sm text-green-200 text-right">© 2025 Avocado</div>
-                </div>
+
+                    {error && <p className="text-red-700 font-semibold text-sm">{error}</p>}
+                    {message && <p className="text-green-700 font-semibold text-sm">{message}</p>}
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="w-full py-3 bg-[#90be6d] hover:bg-[#7cb243] rounded-lg text-white font-semibold transition disabled:opacity-50"
+                    >
+                        {loading ? 'Logging in...' : 'Login'}
+                    </button>
+                </form>
+
+                <p className="mt-8 text-center text-[#4b662d] select-none">
+                    Don't have an account?{' '}
+                    <a href="/signup" className="font-semibold underline hover:text-[#305832]">
+                        Sign up
+                    </a>
+                </p>
             </div>
         </div>
     );
